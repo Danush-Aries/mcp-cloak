@@ -1,0 +1,33 @@
+# Example mcp-cloak configuration. All values shown are the defaults, so an
+# empty file (or no file at all) behaves identically.
+
+[cloak]
+mask_outbound = true       # mask secrets in client -> downstream messages
+mask_inbound = true        # mask secrets in downstream -> client messages
+restore_returning = true   # restore known placeholders travelling back to the client
+entropy_enabled = true     # flag high-entropy generic secrets
+entropy_threshold = 3.5    # bits/char threshold for the entropy detector
+use_presidio = false       # enable Microsoft Presidio PII backend (optional extra)
+
+# Toggle individual detector classes (all default to true).
+[detectors]
+private_key = true
+jwt = true
+aws_key = true
+apikey = true
+email = true
+internal_host = true
+private_ip = true
+phone = true
+secret = true              # entropy-based generic secrets
+
+# Allow/deny rules matched against (tool, field).
+#   action = "allow"  -> leave this field un-masked (allow-list)
+#   action = "deny"   -> force masking (default behaviour)
+# tool / field omitted act as wildcards.
+
+# Example: never mask the free-text "notes" field on the CRM tool.
+# [[rules]]
+# tool = "crm.get_customer"
+# field = "notes"
+# action = "allow"

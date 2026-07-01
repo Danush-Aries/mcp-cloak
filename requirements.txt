@@ -1,0 +1,8 @@
+# mcp-cloak has ZERO required runtime dependencies — the regex + entropy
+# detection path is pure Python standard library (Python >= 3.11 for tomllib).
+#
+# For development and running the test suite, install the dev extra instead:
+#   pip install -e ".[dev]"
+#
+# Optional, richer PII detection (not required):
+#   pip install -e ".[presidio]"
